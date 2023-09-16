@@ -29,6 +29,13 @@ class LGM:
         for input in allInputs:
             self.allPins[input] = value[n]
             n = n + 1
+
+    def led(self, outputs):
+        result = ""
+        allOutputs = outputs[1:-1].split(' ')
+        for output in allOutputs:
+            result = result + self.allPins[output]
+        return (result)
     
 
 
@@ -98,16 +105,23 @@ def main():
     print(machine.run('decoder'))
 
 
-####### ho to compose an chip ########################################
-    # machine = m.LGM()
+####### ho to compose full adder 2 bits ########################################
+    machine = m.LGM()
 
-    # machine.dip('0', "(Ci)")
-    # machine.dip('11', "(A0 A1)")
-    # machine.dip('01', "(B0 B1)")
-    # schema3 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
-    # machine.logic('fadder', schema3)
+    machine.dip('0', "(Co)")
+    machine.dip('01', "(A0 A1)")
+    machine.dip('01', "(B0 B1)")
+    bit0 = "(x XOR A0 B0)(z AND A0 B0)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
+    bit1 = "(x XOR A1 B1)(z AND A1 B1)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
+    machine.logic('bit0', bit0)
+    machine.logic('bit1', bit1)  
+    
+    machine.dip(machine.run('bit0'), "(Co S0)")  
+    machine.dip(machine.run('bit1'), "(Co S1)")  
 
-    #
+    print(machine.led("(Co S1 S0)"))
+
+    print(machine.allPins)
 
 
 if __name__ == '__main__':

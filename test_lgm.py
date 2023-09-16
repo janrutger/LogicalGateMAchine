@@ -11,6 +11,12 @@ class TestGateLogic(unittest.TestCase):
         machine.dip('01', "(a1 b)")
         self.assertEqual(machine.allPins, {'a': '1','a1': '0', 'b': '1'})
 
+    def test_led_output_vaules(self):
+        machine = m.LGM()
+        machine.dip('101', "(a b c)")
+        self.assertEqual(machine.led("(a b)"), '10')
+        self.assertEqual(machine.led("(c b)"), '10')
+
 
     def test_make_logic_from_schema(self):
         machine = m.LGM()
