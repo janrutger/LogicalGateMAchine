@@ -5,9 +5,39 @@ import lgm as m
 class TestGateLogic(unittest.TestCase):
 
 
+    def test_run_logic_from_allLogic(self):
+        machine = m.LGM()
+
+        schema1 = "(c AND a b) c"
+        machine.logic('LGC1', schema1)
+
+        machine.dip('11', "(a b)")
+        self.assertEqual(machine.run('LGC1'), '1')
+        machine.dip('10', "(a b)")
+        self.assertEqual(machine.run('LGC1'), '0')
+
+
+        schema2 = "(c AND a b)(x NOT c) c x"
+        machine.logic('LGC2', schema2)
+
+        machine.dip('11', "(a b)")
+        self.assertEqual(machine.run('LGC2'), '10')
+        machine.dip('01', "(a b)")
+        self.assertEqual(machine.run('LGC2'), '01')
+
+
+
+
+
+    def test_set_input_values(self):
+        machine = m.LGM()
+        machine.dip('10', "(a b)")
+        self.assertEqual(machine.allPins, {'a': '1', 'b': '0'})
+
+
     def test_make_logic_from_schema(self):
         machine = m.LGM()
-        
+
         schema1 = "(c AND a b) c"
         result1 = {'LGC1': [('c', 'AND', 'a', 'b'), ('c',)]}
         machine.logic('LGC1', schema1)
