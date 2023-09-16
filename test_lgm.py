@@ -1,0 +1,56 @@
+import unittest
+import lgm as m
+
+
+class TestGateLogic(unittest.TestCase):
+
+
+    def test_make_logic_from_schema(self):
+        machine = m.LGM()
+        
+        schema1 = "(c AND a b) c"
+        result1 = {'LGC1': [('c', 'AND', 'a', 'b'), ('c',)]}
+        machine.logic('LGC1', schema1)
+        self.assertEqual(machine.allLogic, result1)
+
+        schema2 = "(c AND a b)(x NOT c) c"
+        result2 = {'LGC1': [('c', 'AND', 'a', 'b'), ('x', 'NOT', 'c'), ('c',)]}
+        machine.logic('LGC1', schema2)
+        self.assertEqual(machine.allLogic, result2)
+
+        machine.logic('LGC1', schema1)
+        machine.logic('LGC2', schema2)
+        result3 = {'LGC1': [('c', 'AND', 'a', 'b'), ('c',)], 'LGC2': [('c', 'AND', 'a', 'b'), ('x', 'NOT', 'c'), ('c',)]}
+        self.assertEqual(machine.allLogic, result3)
+
+
+
+    def test_AND(self):
+        machine = m.LGM()
+        self.assertEqual(machine.gate('AND', 0, 0), 0)
+        self.assertEqual(machine.gate('AND', 0, 1), 0)
+        self.assertEqual(machine.gate('AND', 1, 0), 0)
+        self.assertEqual(machine.gate('AND', 1, 1), 1)
+
+    def test_OR(self):
+        machine = m.LGM()
+        self.assertEqual(machine.gate('OR', 0, 0), 0)
+        self.assertEqual(machine.gate('OR', 0, 1), 1)
+        self.assertEqual(machine.gate('OR', 1, 0), 1)
+        self.assertEqual(machine.gate('OR', 1, 1), 1)
+
+    def test_XOR(self):
+        machine = m.LGM()
+        self.assertEqual(machine.gate('XOR', 0, 0), 0)
+        self.assertEqual(machine.gate('XOR', 0, 1), 1)
+        self.assertEqual(machine.gate('XOR', 1, 0), 1)
+        self.assertEqual(machine.gate('XOR', 1, 1), 0)
+
+    def test_NOT(self):
+        machine = m.LGM()
+        self.assertEqual(machine.gate('NOT', 0), 1)
+        self.assertEqual(machine.gate('NOT', 1), 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
