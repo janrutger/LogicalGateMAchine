@@ -78,16 +78,16 @@ def main():
 
     machine = m.LGM()
     schema1 = "(z AND a b)(y AND z c)(yy NOT y) y yy"
-    machine.logic('LGC1', schema1)
+    machine.logic('LGM1', schema1)
 
     machine.dip('110', "(a b c)")
 
-    print(machine.run('LGC1'))
+    print(machine.run('LGM1'))
 
-
+############# decoder logic
     
-    schema2 = "(x NOT A0)(y NOT A1)(D0 AND x y)(D1 AND A0 y)(D2 AND x A1)(D3 AND A0 A1) D0 D1 D2 D3"
-    machine.logic('decoder', schema2)
+    decoder = "(x NOT A0)(y NOT A1)(D0 AND x y)(D1 AND A0 y)(D2 AND x A1)(D3 AND A0 A1) D0 D1 D2 D3"
+    machine.logic('decoder', decoder)
 
     machine.dip('00', "(A0 A1)")
     print(machine.run('decoder'))
@@ -101,27 +101,33 @@ def main():
     machine.dip('11', "(A0 A1)")
     print(machine.run('decoder'))
 
-    machine.dip(machine.run('LGC1'), "(A0 A1)")
-    print(machine.run('decoder'))
 
 
-####### ho to compose full adder 2 bits ########################################
+
+####### how to compose full adder 4 bits ########################################
     machine = m.LGM()
 
     machine.dip('0', "(Co)")
-    machine.dip('01', "(A0 A1)")
-    machine.dip('01', "(B0 B1)")
+    machine.dip('1111', "(A3 A2 A1 A0)")
+    machine.dip('0011', "(B3 B2 B1 B0)")
+
     bit0 = "(x XOR A0 B0)(z AND A0 B0)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
     bit1 = "(x XOR A1 B1)(z AND A1 B1)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
+    bit2 = "(x XOR A2 B2)(z AND A2 B2)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
+    bit3 = "(x XOR A3 B3)(z AND A3 B3)(S XOR x Co)(y AND x Co)(Co OR z y) Co S"
+
     machine.logic('bit0', bit0)
-    machine.logic('bit1', bit1)  
+    machine.logic('bit1', bit1) 
+    machine.logic('bit2', bit2)
+    machine.logic('bit3', bit3)  
     
     machine.dip(machine.run('bit0'), "(Co S0)")  
-    machine.dip(machine.run('bit1'), "(Co S1)")  
+    machine.dip(machine.run('bit1'), "(Co S1)") 
+    machine.dip(machine.run('bit2'), "(Co S2)")  
+    machine.dip(machine.run('bit3'), "(Co S3)")  
 
-    print(machine.led("(Co S1 S0)"))
+    print(machine.led("(Co S3 S2 S1 S0)"))
 
-    print(machine.allPins)
 
 
 if __name__ == '__main__':
