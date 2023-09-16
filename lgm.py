@@ -94,9 +94,21 @@ def main():
     machine.dip('11', "(A0 A1)")
     print(machine.run('decoder'))
 
+    machine.dip(machine.run('LGC1'), "(A0 A1)")
+    print(machine.run('decoder'))
 
+
+####### ho to compose an chip ########################################
+    # machine = m.LGM()
+
+    # machine.dip('0', "(Ci)")
+    # machine.dip('11', "(A0 A1)")
+    # machine.dip('01', "(B0 B1)")
+    # schema3 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
+    # machine.logic('fadder', schema3)
+
+    #
 
 
 if __name__ == '__main__':
     main()       
-        
