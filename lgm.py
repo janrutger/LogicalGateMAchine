@@ -70,10 +70,10 @@ def main():
     import lgm as m
 
     machine = m.LGM()
-    schema1 = "(c AND a b) c"
+    schema1 = "(z AND a b)(y AND z c)(yy NOT y) y yy"
     machine.logic('LGC1', schema1)
 
-    machine.dip('11', "(a b)")
+    machine.dip('110', "(a b c)")
 
     print(machine.run('LGC1'))
 
