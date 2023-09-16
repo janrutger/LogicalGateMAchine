@@ -8,6 +8,8 @@ class TestGateLogic(unittest.TestCase):
         machine = m.LGM()
         machine.dip('10', "(a b)")
         self.assertEqual(machine.allPins, {'a': '1', 'b': '0'})
+        machine.dip('01', "(a1 b)")
+        self.assertEqual(machine.allPins, {'a': '1','a1': '0', 'b': '1'})
 
 
     def test_make_logic_from_schema(self):
