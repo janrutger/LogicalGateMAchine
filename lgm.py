@@ -11,8 +11,8 @@ class LGM:
         logic = copy.deepcopy(self.allLogic[name])
         outputs = logic.pop()
         for gate in logic:
-            if gate[0] not in self.allPins.keys():
-                self.allPins[gate[0]] = 0
+            # if gate[0] not in self.allPins.keys():
+            #     self.allPins[gate[0]] = 0
             if gate[1] != "NOT":
                 self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]]), int(self.allPins[gate[3]])))
             else:
@@ -125,6 +125,31 @@ def main():
     machine.dip(machine.run('bit1'), "(Co S1)") 
     machine.dip(machine.run('bit2'), "(Co S2)")  
     machine.dip(machine.run('bit3'), "(Co S3)")  
+
+    print(machine.led("(Co S3 S2 S1 S0)"))
+
+
+    ####### how to compose full adder 4 bits ########################################
+    machine = m.LGM()
+
+    machine.dip('0', "(Co)")
+    machine.dip('0111', "(A3 A2 A1 A0)")
+    machine.dip('0011', "(B3 B2 B1 B0)")
+
+    bit0 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
+    machine.logic('bit0', bit0)
+
+    machine.dip(machine.led("(A0 B0 Co)"), "(A B Cx)")
+    machine.dip(machine.run('bit0'), "(Co S0)")
+
+    machine.dip(machine.led("(A1 B1 Co)"), "(A B Cx)")
+    machine.dip(machine.run('bit0'), "(Co S1)")
+
+    machine.dip(machine.led("(A2 B2 Co)"), "(A B Cx)")
+    machine.dip(machine.run('bit0'), "(Co S2)")
+
+    machine.dip(machine.led("(A3 B3 Co)"), "(A B Cx)")
+    machine.dip(machine.run('bit0'), "(Co S3)")
 
     print(machine.led("(Co S3 S2 S1 S0)"))
 
