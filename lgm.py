@@ -4,7 +4,7 @@ class LGM:
     def __init__(self):
         self.allLogic = {}
         self.allPins  = {}
-        self.allChips  = {}
+        self.allChips = {}
 
 
     #{'LGC1': [('c', 'AND', 'a', 'b'), ('c',)], 'LGC2': [('c', 'AND', 'a', 'b'), ('x', 'NOT', 'c'), ('c',)]}
@@ -13,8 +13,6 @@ class LGM:
             logic = copy.deepcopy(self.allLogic[name])
             outputs = logic.pop()
             for gate in logic:
-                # if gate[0] not in self.allPins.keys():
-                #     self.allPins[gate[0]] = 0
                 if gate[1] != "NOT":
                     self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]]), int(self.allPins[gate[3]])))
                 else:
@@ -93,12 +91,12 @@ def main():
     import lgm as m
 
     machine = m.LGM()
-    schema1 = "(z AND a b)(y AND z c)(yy NOT y) y yy"
-    machine.logic('LGM1', schema1)
+    and3 = "(z AND A B)(y AND z C) y"
+    machine.logic('and3', and3)
 
-    machine.dip('110', "(a b c)")
+    machine.dip('111', "(A B C)")
 
-    print(machine.run('LGM1'))
+    print(machine.run('and3'))
 
 ############# decoder logic
     
@@ -201,19 +199,27 @@ def main():
 
     print(machine.led("(D)"))
 
+### chip starts here, same logic
     machine = m.LGM()
     and2 = "(c AND a b) c"
     machine.logic('and2', and2)
 
-    CHIP = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
-    machine.chip('CHIP', CHIP)
+    and3 = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
+    machine.chip('and3', and3)
 
     machine.dip('111', "(A B C)") 
-    machine.run('CHIP')
+    machine.run('and3')
     print(machine.led("(D)"))
 
+######### Multiplier 2 bit
+    machine = m.LGM()
+    multi = "(a AND A0 B1)(C0 AND A0 B0)(c AND A1 B0)(d AND A1 B1)(C1 XOR a c)(e AND a c)(C2 XOR e d)(C3 AND e d) C3 C2 C1 C0"
+    machine.logic('multi', multi)
 
-    #print(machine.led("(D)"))
+    machine.dip('11', "(A1 A0)")
+    machine.dip('11', "(B1 B0)")
+
+    print(machine.run('multi'))
 
     
 
