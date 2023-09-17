@@ -4,6 +4,7 @@ class LGM:
     def __init__(self):
         self.allLogic = {}
         self.allPins  = {}
+        self.allChips  = {}
 
 
     #{'LGC1': [('c', 'AND', 'a', 'b'), ('c',)], 'LGC2': [('c', 'AND', 'a', 'b'), ('x', 'NOT', 'c'), ('c',)]}
@@ -37,6 +38,14 @@ class LGM:
             result = result + self.allPins[output]
         return (result)
     
+
+    def chip(self, name, schema):
+        parts = schema.strip('[]').split('], [')
+        logicList = []
+        for part in parts:
+            components = part.split(', ')
+            logicList.append(components)
+        self.allChips[name] = logicList
 
 
     # "(c AND a b) c"
