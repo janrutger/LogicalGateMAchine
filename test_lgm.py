@@ -12,6 +12,18 @@ class TestGateLogic(unittest.TestCase):
         machine.chip('CHIP1', schema1)
         self.assertEqual(machine.allChips, result1)
 
+    def test_run_chip_from_allChips(self):
+        machine = m.LGM()
+        and2 = "(c AND a b) c"
+        machine.logic('and2', and2)
+        machine.dip('111', "(A B C)")
+
+        CHIP = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
+        machine.chip('CHIP', CHIP)
+        machine.run('CHIP')
+        self.assertEqual(machine.led("(D)"), '1')
+        
+
     def test_run_logic_from_allLogic(self):
         machine = m.LGM()
 
@@ -31,6 +43,8 @@ class TestGateLogic(unittest.TestCase):
         self.assertEqual(machine.run('LGM2'), '10')
         machine.dip('01', "(a b)")
         self.assertEqual(machine.run('LGM2'), '01')
+
+        self.assertEqual(machine.run('niks'), 'Unkown')
 
     
     def test_DIP_input_values(self):

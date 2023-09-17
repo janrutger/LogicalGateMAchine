@@ -15,3 +15,28 @@ for part in parts:
 
 # Print the list of lists
 print(list_of_lists)
+
+
+machine = m.LGM()
+    and2 = "(c AND a b) c"
+    machine.logic('and2', and2)
+
+    machine.dip('111', "(A B C)")
+
+    machine.dip(machine.led("(A B)"), "(a b)")
+    machine.dip(machine.run('and2'), "(d)")
+    machine.dip(machine.led("(d C)"), "(a b)")
+    machine.dip(machine.run('and2'), "(D)")
+
+
+
+    print(machine.led("(D)"))
+
+    CHIP = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
+    machine.chip('CHIP', CHIP)
+
+    
+    
+    
+    
+    print(machine.allChips['CHIP'][0])

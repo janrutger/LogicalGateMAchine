@@ -9,20 +9,27 @@ class LGM:
 
     #{'LGC1': [('c', 'AND', 'a', 'b'), ('c',)], 'LGC2': [('c', 'AND', 'a', 'b'), ('x', 'NOT', 'c'), ('c',)]}
     def run(self, name):
-        logic = copy.deepcopy(self.allLogic[name])
-        outputs = logic.pop()
-        for gate in logic:
-            # if gate[0] not in self.allPins.keys():
-            #     self.allPins[gate[0]] = 0
-            if gate[1] != "NOT":
-                self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]]), int(self.allPins[gate[3]])))
-            else:
-                self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]])))
-        result = ""
-        for output in outputs:
-            result = result + self.allPins[output]
-
-        return (result)
+        if name in self.allLogic.keys():
+            logic = copy.deepcopy(self.allLogic[name])
+            outputs = logic.pop()
+            for gate in logic:
+                # if gate[0] not in self.allPins.keys():
+                #     self.allPins[gate[0]] = 0
+                if gate[1] != "NOT":
+                    self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]]), int(self.allPins[gate[3]])))
+                else:
+                    self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]])))
+            result = ""
+            for output in outputs:
+                result = result + self.allPins[output]
+            return (result)
+        elif name in self.allChips.keys():
+            chip = copy.deepcopy(self.allChips[name])
+            for logic in chip:
+                self.dip(self.led(logic[0]), logic[1])
+                self.dip(self.run(logic[2]), logic[3])
+        else:
+            return("Unkown")
 
     def dip(self, value, inputs):
         n = 0
@@ -162,6 +169,53 @@ def main():
 
     print(machine.led("(Co S3 S2 S1 S0)"))
 
+########## On chip
+    machine = m.LGM()
+
+    bit0 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
+    machine.logic('bit0', bit0)
+
+    chip = "[(A0 B0 Co), (A B Cx), bit0, (Co S0)], [(A1 B1 Co), (A B Cx), bit0, (Co S1)], [(A2 B2 Co), (A B Cx), bit0, (Co S2)], [(A3 B3 Co), (A B Cx), bit0, (Co S3)]"
+    machine.chip('chip1', chip)
+
+    machine.dip('0', "(Co)")
+    machine.dip('0011', "(A3 A2 A1 A0)")
+    machine.dip('0011', "(B3 B2 B1 B0)")
+
+    machine.run("chip1")
+
+    print(machine.led("(Co S3 S2 S1 S0)"))
+
+
+##### first chip example ####################################
+    machine = m.LGM()
+    and2 = "(c AND a b) c"
+    machine.logic('and2', and2)
+
+    machine.dip('110', "(A B C)")
+
+    machine.dip(machine.led("(A B)"), "(a b)")
+    machine.dip(machine.run('and2'), "(d)")
+    machine.dip(machine.led("(d C)"), "(a b)")
+    machine.dip(machine.run('and2'), "(D)")
+
+    print(machine.led("(D)"))
+
+    machine = m.LGM()
+    and2 = "(c AND a b) c"
+    machine.logic('and2', and2)
+
+    CHIP = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
+    machine.chip('CHIP', CHIP)
+
+    machine.dip('111', "(A B C)") 
+    machine.run('CHIP')
+    print(machine.led("(D)"))
+
+
+    #print(machine.led("(D)"))
+
+    
 
 
 if __name__ == '__main__':
