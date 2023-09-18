@@ -30,7 +30,7 @@ class LGM:
                 self.dip(self.run(logic[2]), logic[3])
         elif name in self.allBurnt.keys() and inputs != None:
             burn = copy.deepcopy(self.allBurnt[name])
-            outputs = str(burn.pop())
+            outputs = (burn.pop())
             chips = burn.pop().strip('()').split(' ')
             n = 0
             for pinList in burn:
@@ -108,7 +108,7 @@ def main():
 
     import lgm as m
 
-########## On chip
+########## Burn a chip
     machine = m.LGM()
 
     bit0 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
@@ -116,14 +116,6 @@ def main():
 
     chip = "[(A0 B0 Co), (A B Cx), bit0, (Co S0)], [(A1 B1 Co), (A B Cx), bit0, (Co S1)], [(A2 B2 Co), (A B Cx), bit0, (Co S2)], [(A3 B3 Co), (A B Cx), bit0, (Co S3)]"
     machine.chip('chip1', chip)
-
-    machine.dip('0', "(Co)")
-    machine.dip('0011', "(A3 A2 A1 A0)")
-    machine.dip('0011', "(B3 B2 B1 B0)")
-
-    machine.run("chip1")
-
-    print(machine.led("(Co S3 S2 S1 S0)"))
 
     burn = "(A3 A2 A1 A0)(B3 B2 B1 B0)(Co)(chip1)(Co S3 S2 S1 S0)"
     machine.burn("burn", burn)

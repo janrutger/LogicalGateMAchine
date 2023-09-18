@@ -27,6 +27,19 @@ class TestGateLogic(unittest.TestCase):
         self.assertEqual(machine.run('burn1', ("01", "1")), "0")
         self.assertEqual(machine.run('burn1', ("11", "0")), "0")
 
+    def test_run_chip_from_allburnt2(self):
+            machine = m.LGM()
+            bit0 = "(x XOR A B)(z AND A B)(S XOR x Cx)(y AND x Cx)(Co OR z y) Co S"
+            machine.logic('bit0', bit0)
+            chip = "[(A0 B0 Co), (A B Cx), bit0, (Co S0)], [(A1 B1 Co), (A B Cx), bit0, (Co S1)], [(A2 B2 Co), (A B Cx), bit0, (Co S2)], [(A3 B3 Co), (A B Cx), bit0, (Co S3)]"
+            machine.chip('chip1', chip)
+            burn = "(A3 A2 A1 A0)(B3 B2 B1 B0)(Co)(chip1)(Co S3 S2 S1 S0)"
+            machine.burn("burn", burn)
+
+            self.assertEqual(machine.run("burn", ("0101",'1010','0')), '01111')
+            self.assertEqual(machine.run("burn", ("0000",'0011','0')), '00011')
+            self.assertEqual(machine.run("burn", ("1111",'0001','0')), '10000')
+
     def test_make_chip_from_schema(self):
         machine = m.LGM()
         schema1 = "[(A1 A2 A3), (a b c), gate, (o1 o2 o3)], [(A1 A2 A3), (a b c), gate, (o1 o2 o3)]"
