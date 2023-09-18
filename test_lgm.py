@@ -4,9 +4,31 @@ import lgm as m
 
 class TestGateLogic(unittest.TestCase):
 
+    def test_burn_chip_from_schema(self):
+        machine = m.LGM()
+        schema1 = "(a1 a2)(b1 b2)(chip chip)(o1 o2)"
+        result1 = {'burn1': ['(a1 a2)', '(b1 b2)', '(chip chip)', '(o1 o2)']}
+        machine.burn('burn1', schema1)
+        self.assertEqual(machine.allBurnt, result1)
+
+    def test_run_chips_from_allBurnt(self):
+        machine = m.LGM()
+        and2 = "(c AND a b) c"
+        machine.logic('and2', and2)
+        and3 = "[(A B), (a b), and2, (d)], [(d C), (a b), and2, (D)]"
+        machine.chip('and3', and3)
+
+
+        burn = "(A B)(C)(and3)(D)"
+        machine.burn('burn1', burn)
+        self.assertEqual(machine.allBurnt, {'burn1': ['(A B)', '(C)', '(and3)', '(D)']})
+
+        self.assertEqual(machine.run('burn1', ("11", "1")), "1")
+        self.assertEqual(machine.run('burn1', ("01", "1")), "0")
+        self.assertEqual(machine.run('burn1', ("11", "0")), "0")
+
     def test_make_chip_from_schema(self):
         machine = m.LGM()
-
         schema1 = "[(A1 A2 A3), (a b c), gate, (o1 o2 o3)], [(A1 A2 A3), (a b c), gate, (o1 o2 o3)]"
         result1 = {'CHIP1': [['(A1 A2 A3)', '(a b c)', 'gate', '(o1 o2 o3)'], ['(A1 A2 A3)', '(a b c)', 'gate', '(o1 o2 o3)']]}
         machine.chip('CHIP1', schema1)
@@ -22,7 +44,7 @@ class TestGateLogic(unittest.TestCase):
         machine.chip('CHIP', CHIP)
         machine.run('CHIP')
         self.assertEqual(machine.led("(D)"), '1')
-        
+
 
     def test_run_logic_from_allLogic(self):
         machine = m.LGM()
@@ -44,7 +66,7 @@ class TestGateLogic(unittest.TestCase):
         machine.dip('01', "(a b)")
         self.assertEqual(machine.run('LGM2'), '01')
 
-        self.assertEqual(machine.run('niks'), 'Unkown')
+        self.assertEqual(machine.run('niks'), 'Unkown or Invalid')
 
     
     def test_DIP_input_values(self):
