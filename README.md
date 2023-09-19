@@ -56,3 +56,36 @@ print(machine.run("CHIP", ("011")))
 > 0
 
 ```
+## Whitout all extra test instructions
+```python
+import lgm as m
+machine = m.LGM()
+
+# define and activate the logic
+and3 = "(z AND A B)(D AND z C) D"
+machine.logic('and3', and3)
+
+# To run it: Set the input values and run the chip
+machine.dip('101', "(1 2 3)")
+machine.run('chip1')
+
+# Now we have an working chip definition, we can
+# glue the inputs and output pins to the chip
+burn = "(1 2 3)(chip1)(4)"
+machine.burn("CHIP", burn)
+
+
+# Now the chip is ready ro run
+print(machine.run("CHIP", ("101")))
+
+> 0
+
+print(machine.run("CHIP", ("111")))
+
+> 1
+
+print(machine.run("CHIP", ("011")))
+
+> 0
+
+```
