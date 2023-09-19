@@ -33,7 +33,7 @@ machine.chip('chip1', chip)
 machine.dip('101', "(1 2 3)")
 machine.run('chip1')
 # and outputs the rsult
-print(machine.led('(D)'))
+print(machine.led('(4)'))
 
 > 0
 
@@ -65,9 +65,9 @@ machine = m.LGM()
 and3 = "(z AND A B)(D AND z C) D"
 machine.logic('and3', and3)
 
-# To run it: Set the input values and run the chip
-machine.dip('101', "(1 2 3)")
-machine.run('chip1')
+# After you defined and test the logic you can make a chip of one of more logic componentens
+chip = "[(1 2 3), (A B C), and3, (4)]"
+machine.chip('chip1', chip)
 
 # Now we have an working chip definition, we can
 # glue the inputs and output pins to the chip

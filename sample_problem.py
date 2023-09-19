@@ -18,7 +18,7 @@ machine.chip('chip1', chip)
 # # To run it: Set the input values and run the chip
 machine.dip('111', "(1 2 3)")
 machine.run('chip1')
-print(machine.led('(D)'))
+print(machine.led('(4)'))
 
 # Now we have an working chip definition
 # and glue the inputs and output pins to the chip
