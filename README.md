@@ -2,7 +2,9 @@ Welcome to the Hello World page of my Logic Gate Machine.
 With this machine you can build logic circuits with AND/OR/XOR/NOT gates and call them as a Python function.
 
 A simple example:
+
 import the module and create a machine
+
     import lgm as m
     machine = m.LGM()
 
