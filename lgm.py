@@ -34,8 +34,8 @@ class LGM:
             outputs = (burn.pop())
             chips = burn.pop().strip('()').split(' ')
             n = 0
-            burn   = tuple(burn,)
-            inputs = tuple(inputs,) 
+            if isinstance(inputs, str):
+                inputs = (inputs,) 
             for pinList in burn:
                 self.dip(inputs[n], pinList)
                 n = n + 1
