@@ -11,6 +11,27 @@ class TestGateLogic(unittest.TestCase):
         machine.burn('burn1', schema1)
         self.assertEqual(machine.allBurnt, result1)
 
+    # def test_burn_chip_from_schema_xtra(self):
+    #     import lgm as m
+    #     machine = m.LGM()
+
+    #     and3 = "(z AND A B)(D AND z C) D"
+    #     machine.logic('and3', and3)
+    #     machine.dip('111', "(A B C)")
+    #     self.assertEqual(machine.run('and3'), "1")
+    #     chip = "[(1 2 3), (A B C), and3, (D)]"
+    #     machine.chip('chip1', chip)
+    #     machine.dip('111', "(1 2 3)")
+    #     print(machine.run('chip1'))
+    #     #self.assertEqual(machine.run('chip1'), "1")
+
+
+    #     schema1 = "(a1 a2)(chip)(o2)"
+    #     result1 = {'burn1': ['(a1 a2)', '(chip)', '(o2)']}
+    #     machine.burn('burn1', schema1)
+    #     self.assertEqual(machine.allBurnt, result1)
+
+
     def test_run_chips_from_allBurnt(self):
         machine = m.LGM()
         and2 = "(c AND a b) c"
