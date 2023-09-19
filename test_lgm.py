@@ -36,8 +36,8 @@ class TestGateLogic(unittest.TestCase):
         self.assertEqual(machine.led('(4)'), "0")
 #test for burned chip
 
-        schema1 = "(1 2 3)(chip)(4)"
-        result1 = {'burn1': ['(1 2 3)', '(chip)', '(4)']}
+        schema1 = "(1 2 3)(chip1)(4)"
+        result1 = {'burn1': ['(1 2 3)', '(chip1)', '(4)']}
         machine.burn('burn1', schema1)
         self.assertEqual(machine.allBurnt, result1)
 
