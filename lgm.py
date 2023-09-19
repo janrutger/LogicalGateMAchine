@@ -125,13 +125,13 @@ def main():
     print(machine.run("burn", ("1111",'0001','0')))
 
 
-#     machine = m.LGM()
-#     and3 = "(z AND A B)(y AND z C) y"
-#     machine.logic('and3', and3)
+    machine = m.LGM()
+    and3 = "(z AND A B)(y AND z C) y"
+    machine.logic('and3', and3)
 
-#     machine.dip('111', "(A B C)")
+    machine.dip('111', "(A B C)")
 
-#     print(machine.run('and3'))
+    print(machine.run('and3'))
 
 # ############# decoder logic
     
