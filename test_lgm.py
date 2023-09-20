@@ -14,7 +14,7 @@ class TestGateLogic(unittest.TestCase):
     def test_burn_chip_from_schema_xtra(self):
         import lgm as m
         machine = m.LGM()
-#test for logic
+    # build and test the logic
         and3 = "(z AND A B)(D AND z C) D"
         machine.logic('and3', and3)
 
@@ -23,7 +23,7 @@ class TestGateLogic(unittest.TestCase):
 
         machine.dip('101', "(A B C)")
         self.assertEqual(machine.run('and3'), "0")
-#test for chip
+    # build and test the chip
         chip = "[(1 2 3), (A B C), and3, (4)]"
         machine.chip('chip1', chip)
 
@@ -34,8 +34,7 @@ class TestGateLogic(unittest.TestCase):
         machine.dip('101', "(1 2 3)")
         print(machine.run('chip1'))
         self.assertEqual(machine.led('(4)'), "0")
-#test for burned chip
-
+    # burn the inputs/outputs to the chip and test it
         schema1 = "(1 2 3)(chip1)(4)"
         result1 = {'burn1': ['(1 2 3)', '(chip1)', '(4)']}
         machine.burn('burn1', schema1)
