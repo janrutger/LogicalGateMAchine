@@ -56,7 +56,7 @@ print(machine.run("CHIP", ("011")))
 > 0
 
 ```
-## Whithout all extra test instructions
+## Without all extra test instructions
 ```python
 import lgm as m
 machine = m.LGM()
