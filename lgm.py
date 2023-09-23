@@ -15,7 +15,11 @@ class LGM:
             logic = copy.deepcopy(self.allLogic[name])
             outputs = logic.pop()
             for gate in logic:
+                if gate[2] not in self.allPins.keys():
+                    self.allPins[gate[2]] = '0'
                 if gate[1] != "NOT":
+                    if gate[3] not in self.allPins.keys():
+                        self.allPins[gate[3]] = '0'
                     self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]]), int(self.allPins[gate[3]])))
                 else:
                     self.allPins[gate[0]] = str(self.gate(gate[1], int(self.allPins[gate[2]])))

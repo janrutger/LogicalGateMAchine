@@ -1,7 +1,7 @@
 # Logic Gate Machine
-Welkom to the "hello World" page of this project
+Welkom to the "Hello World" page of this project
 
-With this machine you can build logic circuits, using AND/OR/XOR and NOT gates and call them as an Python function.
+With this class you can build logic circuits, using AND/OR/XOR and NOT gates and call them as an Python function.
 
 
 ## Demo
