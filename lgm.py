@@ -61,6 +61,8 @@ class LGM:
         result = ""
         allOutputs = outputs[1:-1].split(' ')
         for output in allOutputs:
+            if output not in self.allPins.keys():
+                self.allPins[output] = '0'
             result = result + self.allPins[output]
         return (result)
     
