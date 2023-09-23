@@ -54,7 +54,7 @@ print(machine.run("CHIP", ("1")))
 print(machine.run("CHIP", ("1")))
 print(machine.run("CHIP", ("1")))
 
-#Twice logic, two Chips, ONE burned Chip Example
+#Twice logic, ONE Chips, ONE burned Chip Example
 
 machine = m.LGM()
 
