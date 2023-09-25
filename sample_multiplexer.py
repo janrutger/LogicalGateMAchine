@@ -21,11 +21,11 @@ print(machine.run('plexer'))
 import lgm as m
 machine = m.LGM()
 
-plexer = "(z NOT S1)(y AND D1 S1)(x AND D0 z)(r OR x y)(z1 NOT S2)(y1 AND D2 S1)(x1 AND r z1)(O OR x y) O"
+plexer = "(z NOT S1)(y AND D1 S1)(x AND D0 z)(r OR x y)(z1 NOT S2)(y1 AND D2 S2)(x1 AND r z1)(O OR x1 y1) O"
 
 machine.logic('plexer', plexer)
 
-machine.dip('101', "(D0 D1 D2)")
+machine.dip('110', "(D0 D1 D2)")
 
 machine.dip('00', "(S2 S1)")
 print(machine.run('plexer'))
@@ -35,6 +35,8 @@ print(machine.run('plexer'))
 
 machine.dip('10', "(S2 S1)")
 print(machine.run('plexer'))
+
+
 
 
 
