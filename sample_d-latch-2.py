@@ -1,3 +1,4 @@
+# SR AND-OR latch
 import lgm as m
 machine = m.LGM()
 
