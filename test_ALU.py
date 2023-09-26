@@ -110,7 +110,7 @@ class TestGateLogic(unittest.TestCase):
         self.assertEqual(self.machine.led('(O0)'), "0")
 
 
-    def test_PLUS_gate(self):
+    def test_ADDER_gate(self):
         self.machine.dip('000', "(Anot Bnot Cin)")
         self.machine.dip('11', "(S2 S1)")
 
