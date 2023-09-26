@@ -110,7 +110,42 @@ class TestGateLogic(unittest.TestCase):
         self.assertEqual(self.machine.led('(O0)'), "0")
 
 
+    def test_PLUS_gate(self):
+        self.machine.dip('000', "(Anot Bnot Cin)")
+        self.machine.dip('11', "(S2 S1)")
 
+
+        self.machine.dip('000', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "00")
+
+        self.machine.dip('001', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "10")
+
+        self.machine.dip('010', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "10")
+
+        self.machine.dip('011', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "01")
+
+        self.machine.dip('100', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "10")
+
+        self.machine.dip('101', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "01")
+
+        self.machine.dip('110', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "01")
+
+        self.machine.dip('111', "(A0 B0 Cin)")
+        self.machine.run('ALU')
+        self.assertEqual(self.machine.led('(O0 Cout)'), "11")
 
 
 

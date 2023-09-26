@@ -30,8 +30,8 @@ machine.chip('ALU', ALU)
 
 ## Run de ALU
 machine.dip('11', "(A0 B0)")
-machine.dip('110', "(Anot Bnot Cin)")
-machine.dip('01', "(S2 S1)")
+machine.dip('000', "(Anot Bnot Cin)")
+machine.dip('11', "(S2 S1)")
 
 machine.run("ALU")
 
