@@ -22,7 +22,7 @@ machine.logic('not1', not1)
 
 
 ## Glue the logic to on bit ALU
-ALU = "[(A0), (a), not1, (An)], [(B0), (a), not1, (Bn)], [(A0 An Anot), (D0 D1 X), plexer21, (Ain)], [(B0 Bn Bnot), (D0 D1 X), plexer21, (Bin)], [(Ain Bin Cin), (A B Cx), adder, (Cout r2)], [(Ain Bin), (a b), or2, (r1)], [(Ain Bin), (a b), and2, (r0)], [(r0 r1 r2 S1 S2), (D0 D1 D2 X1 X2), plexer31, (O0)]"
+ALU = "[(A0), (a), not1, (An)], [(B0), (a), not1, (Bn)], [(A0 An Anot), (D0 D1 X), plexer21, (Ain)], [(B0 Bn Bnot), (D0 D1 X), plexer21, (Bin)], [(Ain Bin Cin), (A B Cx), adder, (Cout r2)], [(Ain Bin), (a b), or2, (r1)], [(Ain Bin), (a b), and2, (r0)], [(r0 r1 r2 S1 S2), (D0 D1 D2 X1 X2), plexer31, (R0)]"
 machine.chip('ALU', ALU)
 
 
@@ -34,4 +34,4 @@ machine.dip('000', "(Anot Bnot Cin)")
 machine.dip('00', "(S2 S1)")
 
 machine.run("ALU")
-print(machine.led('(Cout O0)'))
+print(machine.led('(Cout R0)'))
