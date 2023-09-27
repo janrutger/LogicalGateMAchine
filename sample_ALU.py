@@ -31,15 +31,7 @@ machine.chip('ALU', ALU)
 ## Run de ALU
 machine.dip('11', "(A0 B0)")
 machine.dip('000', "(Anot Bnot Cin)")
-machine.dip('11', "(S2 S1)")
+machine.dip('00', "(S2 S1)")
 
 machine.run("ALU")
-
-# print(machine.led('(A0 An)'))
-# print(machine.led('(B0 Bn)'))
-# print(machine.led('(Ain Bin)'))
-# print(machine.led('(r2 Cout)'))
-
-# #print(machine.led('(r0 r1 r2 Cout)'))
-
 print(machine.led('(Cout O0)'))
