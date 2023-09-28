@@ -29,9 +29,9 @@ machine.chip('bit3', bit3)
 
 
 ## Run de ALU
-machine.dip('0100', "(A3 A2 A1 A0)")
-machine.dip('1111', "(B3 B2 B1 B0)")
-machine.dip('00', "(Anot Bnot)")
+machine.dip('1000', "(A3 A2 A1 A0)")
+machine.dip('0101', "(B3 B2 B1 B0)")
+machine.dip('01', "(Anot Bnot)")
 machine.dip('11', "(S2 S1)")
 
 machine.run("bit0")
