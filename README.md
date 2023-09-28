@@ -2,6 +2,7 @@
 Welkom to the "Hello World" page of this project
 
 With this class you can build logic circuits, using AND/OR/XOR and NOT gates and call them as an Python function.
+Watch this serie for inspriration https://www.youtube.com/watch?v=Pa9PEtLu7no&list=PL1C2GgOjAF-KY0zekzeMtFcYSlACDHyOK
 
 
 ## Demo

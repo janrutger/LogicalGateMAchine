@@ -27,6 +27,7 @@ machine.chip('bit1', bit1)
 machine.chip('bit2', bit2)
 machine.chip('bit3', bit3)
 
+# Burn an 4 bit ALU 
 burn = "(A3 A2 A1 A0)(B3 B2 B1 B0)(S1 S2 Anot Bnot)(bit0 bit1 bit2 bit3)(Cout R3 R2 R1 R0)"
 machine.burn('ALU', burn)
 
