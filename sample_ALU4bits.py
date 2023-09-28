@@ -28,15 +28,30 @@ machine.chip('bit2', bit2)
 machine.chip('bit3', bit3)
 
 
-## Run de ALU
-machine.dip('1000', "(A3 A2 A1 A0)")
-machine.dip('0101', "(B3 B2 B1 B0)")
-machine.dip('01', "(Anot Bnot)")
-machine.dip('11', "(S2 S1)")
+# ## Run de ALU
+# machine.dip('1000', "(A3 A2 A1 A0)")
+# machine.dip('0101', "(B3 B2 B1 B0)")
+# machine.dip('01', "(Anot Bnot)")
+# machine.dip('11', "(S2 S1)")
 
-machine.run("bit0")
-machine.run("bit1")
-machine.run("bit2")
-machine.run("bit3")
+# machine.run("bit0")
+# machine.run("bit1")
+# machine.run("bit2")
+# machine.run("bit3")
 
-print(machine.led('(Cout R3 R2 R1 R0)'))
+# print(machine.led('(Cout R3 R2 R1 R0)'))
+
+# Truth table
+# | S1 | S2 | An | Bn |
+# ---------------------
+# |  0 |  0 |  0 |  0 |   AND
+# |  1 |  0 |  0 |  0 |   OR
+# |  1 |  0 |  1 |  1 |   NAND
+# |  0 |  0 |  1 |  1 |   NOR 
+# |  x |  1 |  0 |  0 |   ADD 
+# |  x |  1 |  0 |  1 |   SUB
+
+burn = "(A3 A2 A1 A0)(B3 B2 B1 B0)(S1 S2 Anot Bnot)(bit0 bit1 bit2 bit3)(Cout R3 R2 R1 R0)"
+machine.burn('ALU', burn)
+
+print(machine.run("ALU", ("1101",'0011','1100')))
