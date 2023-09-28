@@ -15,7 +15,7 @@ machine.logic('or2', or2)
 not1 = "(b NOT a) b"
 machine.logic('not1', not1)
 
-## Glue the logic to on bit ALU
+## Glue the logic to 4 one Bits ALU's 
 lsb0 = "[(A0), (a), not1, (An)], [(B0), (a), not1, (Bn)], [(A0 An Anot), (D0 D1 X), plexer21, (Ain)], [(B0 Bn Bnot), (D0 D1 X), plexer21, (Bin)], [(Ain Bin Bnot), (A B Cx), adder, (Cout r2)], [(Ain Bin), (a b), or2, (r1)], [(Ain Bin), (a b), and2, (r0)], [(r0 r1 r2 S1 S2), (D0 D1 D2 X1 X2), plexer31, (R0)]"
 bit1 = "[(A1), (a), not1, (An)], [(B1), (a), not1, (Bn)], [(A1 An Anot), (D0 D1 X), plexer21, (Ain)], [(B1 Bn Bnot), (D0 D1 X), plexer21, (Bin)], [(Ain Bin Cout), (A B Cx), adder, (Cout r2)], [(Ain Bin), (a b), or2, (r1)], [(Ain Bin), (a b), and2, (r0)], [(r0 r1 r2 S1 S2), (D0 D1 D2 X1 X2), plexer31, (R1)]"
 bit2 = "[(A2), (a), not1, (An)], [(B2), (a), not1, (Bn)], [(A2 An Anot), (D0 D1 X), plexer21, (Ain)], [(B2 Bn Bnot), (D0 D1 X), plexer21, (Bin)], [(Ain Bin Cout), (A B Cx), adder, (Cout r2)], [(Ain Bin), (a b), or2, (r1)], [(Ain Bin), (a b), and2, (r0)], [(r0 r1 r2 S1 S2), (D0 D1 D2 X1 X2), plexer31, (R2)]"
@@ -32,6 +32,7 @@ machine.burn('ALU', burn)
 
 
 # Truth table
+# ---------------------
 # | S1 | S2 | An | Bn |
 # ---------------------
 # |  0 |  0 |  0 |  0 |   AND
@@ -40,6 +41,6 @@ machine.burn('ALU', burn)
 # |  0 |  0 |  1 |  1 |   NOR 
 # |  x |  1 |  0 |  0 |   ADD 
 # |  x |  1 |  0 |  1 |   SUB
-
+# ---------------------
 
 print(machine.run("ALU", ("1101",'0011','1100')))
