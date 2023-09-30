@@ -1,5 +1,6 @@
 import copy
 import re
+import json
 
 class LGM:
     def __init__(self):
@@ -109,7 +110,10 @@ class LGM:
             else:
                 return (1)
 
-
+    def model(self):
+        model = {"burned": self.allBurnt, "chips" : self.allChips, "logic" : self.allLogic, "pins" :self.allPins}
+        jsonModel = json.dumps(model)
+        return(jsonModel)
 
 
 ####################################################

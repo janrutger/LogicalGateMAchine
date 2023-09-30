@@ -43,5 +43,6 @@ machine.burn('ALU', burn)
 # |  x |  1 |  0 |  0 |   ADD 
 # |  x |  1 |  0 |  1 |   SUB
 # ---------------------
-
 print(machine.run("ALU", ("1101",'0011','1100')))
+
+print(machine.model())

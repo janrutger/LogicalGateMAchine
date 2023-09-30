@@ -33,4 +33,4 @@ machine.burn("NOT", burn)
 print(machine.run("NOT", ("1")))
 print(machine.run("NOT", ("0")))
 
-
+print(machine.model())
