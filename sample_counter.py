@@ -18,6 +18,8 @@ machine.logic('clk2', clk2)
 nand2 = "(z AND a b)(c NOT z) c"
 machine.logic('nand2', nand2)
 
+machine.dip('10', "(H L)")
+
 dlatch = "[(Qn Clk), (a b), nand2, (x)], [(Clk x), (a b), nand2, (y)], [(x Qn), (a b), nand2, (Q)], [(y Q), (a b), nand2, (Qn)], [(x Qn), (a b), nand2, (Q)], [(y Q), (a b), nand2, (Qn)]"
 machine.chip('dlatch', dlatch)
 
@@ -52,4 +54,4 @@ print(machine.run('counter', ("1")))
 print(machine.run('counter', ("1")))
 print(machine.run('counter', ("1")))
 
-
+#print(machine.model())
