@@ -21,6 +21,7 @@ machine.chip('Dlatch5', Dlatch5)
 burn = "(E)(Dlatch5 Dlatch4 Dlatch3 Dlatch2 Dlatch1)(Q4 Q3 Q2 Q1)"
 machine.burn("counter", burn)
 
+print(machine.run("counter", ("0")))
 print(machine.run("counter", ("1")))
 print(machine.run("counter", ("1")))
 print(machine.run("counter", ("1")))
@@ -29,4 +30,6 @@ print(machine.run("counter", ("1")))
 print(machine.run("counter", ("1")))
 print(machine.run("counter", ("1")))
 print(machine.run("counter", ("1")))
-print(machine.run("counter", ("1")))
+
+
+#print(machine.model())
