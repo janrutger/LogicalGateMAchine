@@ -14,9 +14,13 @@ machine.burn("CHIP", burn)
 
 print(machine.run("CHIP", ("00")))
 print(machine.run("CHIP", ("10")))
+print(machine.run("CHIP", ("00")))
 
 print(machine.run("CHIP", ("01")))
 print(machine.run("CHIP", ("00")))
+print(machine.run("CHIP", ("10")))
+print(machine.run("CHIP", ("00")))
+
 
 print(machine.run("CHIP", ("11")))
 print(machine.run("CHIP", ("00")))

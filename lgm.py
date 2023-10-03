@@ -34,7 +34,6 @@ class LGM:
                 self.dip(self.led(logic[0]), logic[1])
                 self.dip(self.run(logic[2]), logic[3])
         elif name in self.allBurnt.keys() and inputs != None:
-
             burn = copy.deepcopy(self.allBurnt[name])
             outputs = (burn.pop())
             chips = burn.pop().strip('()').split(' ')

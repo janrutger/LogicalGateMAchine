@@ -58,4 +58,4 @@ print(machine.run('counter', ("1")))
 print(machine.run('counter', ("1")))
 print(machine.run('counter', ("1")))
 
-print(machine.model())
+#print(machine.model())
