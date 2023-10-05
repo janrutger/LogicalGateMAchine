@@ -2,11 +2,11 @@ import lgm as m
 machine = m.LGM()
 
 ## 4 to 1 decoder and E(nable / write) bit
-decoder = "(x NOT A0)(y NOT A1)(E0 AND x y)(E0 AND e0 E)(e1 AND A0 y)(E1 AND e1 E)(e2 AND x A1)(E2 AND e2 E)(e3 AND A0 A1)(E3 AND e3 E) E3 E2 E1 E0"
+decoder = "(x NOT A0)(y NOT A1)(e0 AND x y)(E0 AND e0 E)(e1 AND A0 y)(E1 AND e1 E)(e2 AND x A1)(E2 AND e2 E)(e3 AND A0 A1)(E3 AND e3 E) E3 E2 E1 E0"
 machine.logic('decoder', decoder)
 
 
-## 4x4 memory cells, ans reset bit
+## 4x4 memory cells, and reset bit
 reset = "(z NOT K)(Di AND z L) Di"
 nand2 = "(z AND a b)(c NOT z) c"
 machine.logic('nand2', nand2)
@@ -62,10 +62,10 @@ machine.logic('not1', not1)
 machine.logic('and3', and3)
 machine.logic('or4',  or4)
 
-plexer0 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q00 A0n A1n), (a b c), and3, (y0)], [(Q10 A0 A1n), (a b c), and3, (y1)], [(Q20 A0n A1), (a b c), and3, (y2)], [(Q30 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (E0)]"
-plexer1 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q01 A0n A1n), (a b c), and3, (y0)], [(Q11 A0 A1n), (a b c), and3, (y1)], [(Q21 A0n A1), (a b c), and3, (y2)], [(Q31 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (E1)]"
-plexer2 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q02 A0n A1n), (a b c), and3, (y0)], [(Q12 A0 A1n), (a b c), and3, (y1)], [(Q22 A0n A1), (a b c), and3, (y2)], [(Q32 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (E2)]"
-plexer3 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q03 A0n A1n), (a b c), and3, (y0)], [(Q13 A0 A1n), (a b c), and3, (y1)], [(Q23 A0n A1), (a b c), and3, (y2)], [(Q33 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (E3)]"
+plexer0 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q00 A0n A1n), (a b c), and3, (y0)], [(Q10 A0 A1n), (a b c), and3, (y1)], [(Q20 A0n A1), (a b c), and3, (y2)], [(Q30 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (Q0)]"
+plexer1 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q01 A0n A1n), (a b c), and3, (y0)], [(Q11 A0 A1n), (a b c), and3, (y1)], [(Q21 A0n A1), (a b c), and3, (y2)], [(Q31 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (Q1)]"
+plexer2 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q02 A0n A1n), (a b c), and3, (y0)], [(Q12 A0 A1n), (a b c), and3, (y1)], [(Q22 A0n A1), (a b c), and3, (y2)], [(Q32 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (Q2)]"
+plexer3 = "[(A0), (a), not1, (A0n)], [(A1), (a), not1, (A1n)], [(Q03 A0n A1n), (a b c), and3, (y0)], [(Q13 A0 A1n), (a b c), and3, (y1)], [(Q23 A0n A1), (a b c), and3, (y2)], [(Q33 A0 A1), (a b c), and3, (y3)], [(y0 y1 y2 y3), (a b c d), or4, (Q3)]"
 
 
 machine.chip('plexer0', plexer0)
@@ -76,6 +76,24 @@ machine.chip('plexer3', plexer3)
 
 
 
+burn  = "(D3 D2 D1 D0)(A0 A1)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
+machine.burn("MEM", burn)
 
-burn  = "(D3 D2 D1 D0)(A0 A1)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33)(Q3 Q2 Q1 Q0)"
-machine.burn("register", burn)
+print(machine.run("MEM", ("0001",'00','11')))
+print(machine.run("MEM", ("0011",'01','11')))
+print(machine.run("MEM", ("0111",'10','11')))
+print(machine.run("MEM", ("1111",'11','11')))
+
+
+print(machine.run("MEM", ("0000",'00','10')))
+print(machine.run("MEM", ("0001",'01','10')))
+print(machine.run("MEM", ("0010",'10','10')))
+print(machine.run("MEM", ("1011",'11','10')))
+
+print(machine.run("MEM", ("1111",'00','00')))
+print(machine.run("MEM", ("1111",'01','00')))
+print(machine.run("MEM", ("1111",'10','00')))
+print(machine.run("MEM", ("1111",'11','00')))
+
+
+#print(machine.model())
