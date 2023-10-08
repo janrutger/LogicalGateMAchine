@@ -4,16 +4,16 @@ def load(machine):
     machine.logic('nand2', nand2)
     machine.logic('reset', reset)
 
-    dlatch0 = "[(Res D0), (K L), reset, (Di0)], [(Di0 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x Qn0), (a b), nand2, (Q0)], [(y Q0), (a b), nand2, (Qn0)], [(x Qn0), (a b), nand2, (Q0)], [(y Q0), (a b), nand2, (Qn0)]"    
-    dlatch1 = "[(Res D1), (K L), reset, (Di1)], [(Di1 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x Qn1), (a b), nand2, (Q1)], [(y Q1), (a b), nand2, (Qn1)], [(x Qn1), (a b), nand2, (Q1)], [(y Q1), (a b), nand2, (Qn1)]"      
-    dlatch2 = "[(Res D2), (K L), reset, (Di2)], [(Di2 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x Qn2), (a b), nand2, (Q2)], [(y Q2), (a b), nand2, (Qn2)], [(x Qn2), (a b), nand2, (Q2)], [(y Q2), (a b), nand2, (Qn2)]"       
-    dlatch3 = "[(Res D3), (K L), reset, (Di3)], [(Di3 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x Qn3), (a b), nand2, (Q3)], [(y Q3), (a b), nand2, (Qn3)], [(x Qn3), (a b), nand2, (Q3)], [(y Q3), (a b), nand2, (Qn3)]"        
+    RegA0 = "[(Res D0), (K L), reset, (Di0)], [(Di0 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x QAn0), (a b), nand2, (QA0)], [(y QA0), (a b), nand2, (QAn0)], [(x QAn0), (a b), nand2, (QA0)], [(y QA0), (a b), nand2, (QAn0)]"    
+    RegA1 = "[(Res D1), (K L), reset, (Di1)], [(Di1 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x QAn1), (a b), nand2, (QA1)], [(y QA1), (a b), nand2, (QAn1)], [(x QAn1), (a b), nand2, (QA1)], [(y QA1), (a b), nand2, (QAn1)]"      
+    RegA2 = "[(Res D2), (K L), reset, (Di2)], [(Di2 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x QAn2), (a b), nand2, (QA2)], [(y QA2), (a b), nand2, (QAn2)], [(x QAn2), (a b), nand2, (QA2)], [(y QA2), (a b), nand2, (QAn2)]"       
+    RegA3 = "[(Res D3), (K L), reset, (Di3)], [(Di3 E), (a b), nand2, (x)], [(E x), (a b), nand2, (y)], [(x QAn3), (a b), nand2, (QA3)], [(y QA3), (a b), nand2, (QAn3)], [(x QAn3), (a b), nand2, (QA3)], [(y QA3), (a b), nand2, (QAn3)]"        
 
-    machine.chip('dlatch0', dlatch0)
-    machine.chip('dlatch1', dlatch1)
-    machine.chip('dlatch2', dlatch2)
-    machine.chip('dlatch3', dlatch3)
+    machine.chip('RegA0', RegA0)
+    machine.chip('RegA1', RegA1)
+    machine.chip('RegA2', RegA2)
+    machine.chip('RegA3', RegA3)
 
 
-    burn  = "(D3 D2 D1 D0)(E Res)(dlatch0 dlatch1 dlatch2 dlatch3)(Q3 Q2 Q1 Q0)"
-    machine.burn("register", burn)
+    burn  = "(D3 D2 D1 D0)(E Res)(RegA0 RegA1 RegA2 RegA3)(QA3 QA2 QA1 QA0)"
+    machine.burn("registerA", burn)
