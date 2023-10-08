@@ -76,3 +76,6 @@ def load(machine):
     ## burn a chip and test it!!
     burn  = "(D3 D2 D1 D0)(Qacn Qacn1)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
     machine.burn("MEM", burn)
+
+    burn2  = "(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
+    machine.burn("memory", burn2)
