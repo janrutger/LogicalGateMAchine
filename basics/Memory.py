@@ -2,6 +2,8 @@
 def load(machine):
     ## 4 to 1 decoder and E(nable / write) bit
     decoder = "(x NOT Qacn)(y NOT Qacn1)(e0 AND x y)(E0 AND e0 E)(e1 AND Qacn y)(E1 AND e1 E)(e2 AND x Qacn1)(E2 AND e2 E)(e3 AND Qacn Qacn1)(E3 AND e3 E) E3 E2 E1 E0"
+    #decoder= "(x NOT A0)  (y NOT A1)   (e0 AND x y)(E0 AND e0 E)(e1 AND A0 y)  (E1 AND e1 E)(e2 AND x A1)   (E2 AND e2 E)(e3 AND A0 A1)     (E3 AND e3 E) E3 E2 E1 E0"
+
     machine.logic('decoder', decoder)
 
 
@@ -74,7 +76,7 @@ def load(machine):
 
 
     ## burn a chip and test it!!
-    burn  = "(D3 D2 D1 D0)(Qacn Qacn1)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
+    burn  = "(D3 D2 D1 D0)(Qacn1 Qacn)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
     machine.burn("MEM", burn)
 
     burn2  = "(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"

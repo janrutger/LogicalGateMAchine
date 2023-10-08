@@ -27,6 +27,9 @@ def load(machine):
     # Burn an 4 bit ALU 
     burn = "(QA3 QA2 QA1 QA0)(QB3 QB2 QB1 QB0)(S1 S2 Anot Bnot)(bit0 bit1 bit2 bit3)(Cout R3 R2 R1 R0)"
     machine.burn('ALU', burn)
+ 
+    burn2 = "(S1 S2 Anot Bnot)(bit0 bit1 bit2 bit3)(Cout R3 R2 R1 R0)"
+    machine.burn('alu', burn2)
 
 
     # Truth table

@@ -22,8 +22,6 @@ print(machine.run("MEM", ("1010",'01','10')))
 print(machine.run("MEM", ("1111",'10','10')))
 print(machine.run("MEM", ("0000",'11','10')))
 
-
-
 ## set adres counter to first adres
 print(machine.run("adrescounter", ('1')))
 ## read first adres
@@ -33,11 +31,13 @@ print(machine.run("regA", ('10')))
 
 ## write next memory adres in register B
 print(machine.run("adrescounter", ('1')))
-print(machine.run("adrescounter", ('1')))
 print(machine.run("memory", ('00')))
 print(machine.run("regB", ('10')))
 
+## perform alu operation
+print(machine.run("alu", ('1000')))
 
 
 
-print(machine.model())
+
+#print(machine.model())
