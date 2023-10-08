@@ -95,4 +95,10 @@ print(machine.run("MEM", ("1111",'10','00')))
 print(machine.run("MEM", ("1111",'11','00')))
 
 
-#print(machine.model())
+print(machine.run("MEM", ("1110",'00','10')))
+print(machine.run("MEM", ("1101",'01','10')))
+print(machine.run("MEM", ("1011",'10','10')))
+print(machine.run("MEM", ("0111",'11','10')))
+
+
+print(machine.model())
