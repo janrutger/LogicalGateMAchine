@@ -17,3 +17,6 @@ def load(machine):
 
     burn  = "(R3 R2 R1 R0)(E Res)(RegC0 RegC1 RegC2 RegC3)(QR3 QR2 QR1 QR0)"
     machine.burn("registerR", burn)
+
+    burn2  = "(E Res)(RegC0 RegC1 RegC2 RegC3)(QR3 QR2 QR1 QR0)"
+    machine.burn("regR", burn2)

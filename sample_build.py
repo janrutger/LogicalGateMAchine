@@ -17,10 +17,10 @@ RegisterR.load(machine)
 
 
 ## init memory, 
-print(machine.run("MEM", ("0101",'00','10')))
-print(machine.run("MEM", ("1010",'01','10')))
+print(machine.run("MEM", ("0011",'00','10')))
+print(machine.run("MEM", ("0001",'01','10')))
 print(machine.run("MEM", ("1111",'10','10')))
-print(machine.run("MEM", ("0000",'11','10')))
+print(machine.run("MEM", ("1111",'11','11')))
 
 ## set adres counter to first adres
 print(machine.run("adrescounter", ('1')))
@@ -37,7 +37,36 @@ print(machine.run("regB", ('10')))
 ## perform alu operation
 print(machine.run("alu", ('1000')))
 
+    # Truth table
+    # ---------------------
+    # | S1 | S2 | An | Bn |
+    # ---------------------
+    # |  0 |  0 |  0 |  0 |   AND
+    # |  1 |  0 |  0 |  0 |   OR
+    # |  1 |  0 |  1 |  1 |   NAND
+    # |  0 |  0 |  1 |  1 |   NOR 
+    # |  x |  1 |  0 |  0 |   ADD 
+    # |  x |  1 |  0 |  1 |   SUB
+    # ---------------------
+
+## Write result to register R
+print(machine.run("regR", ('10')))
+## set adrescounter to 3 adres
+print(machine.run("adrescounter", ('1')))
+# Set Register R to Datalines memory
+machine.dip(machine.run("regR", ('00')), "(D3 D2 D1 D0)")
+# Write datalines to memory adres
+print(machine.run("memory", ('10')))
+
+
+## Check result in memory
+print(machine.run("MEM", ("1111",'00','00')))
+print(machine.run("MEM", ("1111",'01','00')))
+print(machine.run("MEM", ("1111",'10','00')))
+print(machine.run("MEM", ("1111",'11','01')))
+
 
 
 
 #print(machine.model())
+pass
