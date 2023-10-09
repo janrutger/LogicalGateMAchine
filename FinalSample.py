@@ -35,7 +35,7 @@ RegisterR.load(machine)
 (machine.run("regB", ('10')))
 
 ## perform alu operation
-(machine.run("alu", ('0100')))
+(machine.run("alu", ('1000')))
 
     # Truth table
     # ---------------------
@@ -48,13 +48,13 @@ RegisterR.load(machine)
     # |  x |  1 |  0 |  0 |   ADD 
     # |  x |  1 |  0 |  1 |   SUB
     # ---------------------
-
+ 
 ## Write result to register R
 (machine.run("regR", ('10')))
 ## set adrescounter to 3 adres
 (machine.run("adrescounter", ('1')))
 # Set Register R to Datalines memory
-machine.dip(machine.run("regR", ('00')), "(D3 D2 D1 D0)")
+(machine.run("regR", ('00')))
 # Write datalines to memory adres
 (machine.run("memory", ('10')))
 

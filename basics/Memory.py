@@ -6,32 +6,32 @@ def load(machine):
 
     machine.logic('decoder', decoder)
 
-
+#(QR3 QR2 QR1 QR0)
     ## 4x4 memory cells, and reset bit
     reset = "(z NOT K)(Di AND z L) Di"
     nand2 = "(z AND a b)(c NOT z) c"
     machine.logic('nand2', nand2)
     machine.logic('reset', reset)
 
-    bit00 = "[(Res D0), (K L), reset, (Di00)], [(Di00 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn00), (a b), nand2, (Q00)], [(y Q00), (a b), nand2, (Qn00)], [(x Qn00), (a b), nand2, (Q00)], [(y Q00), (a b), nand2, (Qn00)]"    
-    bit01 = "[(Res D1), (K L), reset, (Di01)], [(Di01 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn01), (a b), nand2, (Q01)], [(y Q01), (a b), nand2, (Qn01)], [(x Qn01), (a b), nand2, (Q01)], [(y Q01), (a b), nand2, (Qn01)]"      
-    bit02 = "[(Res D2), (K L), reset, (Di02)], [(Di02 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn02), (a b), nand2, (Q02)], [(y Q02), (a b), nand2, (Qn02)], [(x Qn02), (a b), nand2, (Q02)], [(y Q02), (a b), nand2, (Qn02)]"       
-    bit03 = "[(Res D3), (K L), reset, (Di03)], [(Di03 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn03), (a b), nand2, (Q03)], [(y Q03), (a b), nand2, (Qn03)], [(x Qn03), (a b), nand2, (Q03)], [(y Q03), (a b), nand2, (Qn03)]"        
+    bit00 = "[(Res QR0), (K L), reset, (Di00)], [(Di00 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn00), (a b), nand2, (Q00)], [(y Q00), (a b), nand2, (Qn00)], [(x Qn00), (a b), nand2, (Q00)], [(y Q00), (a b), nand2, (Qn00)]"    
+    bit01 = "[(Res QR1), (K L), reset, (Di01)], [(Di01 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn01), (a b), nand2, (Q01)], [(y Q01), (a b), nand2, (Qn01)], [(x Qn01), (a b), nand2, (Q01)], [(y Q01), (a b), nand2, (Qn01)]"      
+    bit02 = "[(Res QR2), (K L), reset, (Di02)], [(Di02 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn02), (a b), nand2, (Q02)], [(y Q02), (a b), nand2, (Qn02)], [(x Qn02), (a b), nand2, (Q02)], [(y Q02), (a b), nand2, (Qn02)]"       
+    bit03 = "[(Res QR3), (K L), reset, (Di03)], [(Di03 E0), (a b), nand2, (x)], [(E0 x), (a b), nand2, (y)], [(x Qn03), (a b), nand2, (Q03)], [(y Q03), (a b), nand2, (Qn03)], [(x Qn03), (a b), nand2, (Q03)], [(y Q03), (a b), nand2, (Qn03)]"        
 
-    bit10 = "[(Res D0), (K L), reset, (Di10)], [(Di00 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn10), (a b), nand2, (Q10)], [(y Q10), (a b), nand2, (Qn10)], [(x Qn10), (a b), nand2, (Q10)], [(y Q10), (a b), nand2, (Qn10)]"    
-    bit11 = "[(Res D1), (K L), reset, (Di11)], [(Di01 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn11), (a b), nand2, (Q11)], [(y Q11), (a b), nand2, (Qn11)], [(x Qn11), (a b), nand2, (Q11)], [(y Q11), (a b), nand2, (Qn11)]"      
-    bit12 = "[(Res D2), (K L), reset, (Di12)], [(Di02 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn12), (a b), nand2, (Q12)], [(y Q12), (a b), nand2, (Qn12)], [(x Qn12), (a b), nand2, (Q12)], [(y Q12), (a b), nand2, (Qn12)]"       
-    bit13 = "[(Res D3), (K L), reset, (Di13)], [(Di03 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn13), (a b), nand2, (Q13)], [(y Q13), (a b), nand2, (Qn13)], [(x Qn13), (a b), nand2, (Q13)], [(y Q13), (a b), nand2, (Qn13)]"        
+    bit10 = "[(Res QR0), (K L), reset, (Di10)], [(Di00 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn10), (a b), nand2, (Q10)], [(y Q10), (a b), nand2, (Qn10)], [(x Qn10), (a b), nand2, (Q10)], [(y Q10), (a b), nand2, (Qn10)]"    
+    bit11 = "[(Res QR1), (K L), reset, (Di11)], [(Di01 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn11), (a b), nand2, (Q11)], [(y Q11), (a b), nand2, (Qn11)], [(x Qn11), (a b), nand2, (Q11)], [(y Q11), (a b), nand2, (Qn11)]"      
+    bit12 = "[(Res QR2), (K L), reset, (Di12)], [(Di02 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn12), (a b), nand2, (Q12)], [(y Q12), (a b), nand2, (Qn12)], [(x Qn12), (a b), nand2, (Q12)], [(y Q12), (a b), nand2, (Qn12)]"       
+    bit13 = "[(Res QR3), (K L), reset, (Di13)], [(Di03 E1), (a b), nand2, (x)], [(E1 x), (a b), nand2, (y)], [(x Qn13), (a b), nand2, (Q13)], [(y Q13), (a b), nand2, (Qn13)], [(x Qn13), (a b), nand2, (Q13)], [(y Q13), (a b), nand2, (Qn13)]"        
 
-    bit20 = "[(Res D0), (K L), reset, (Di20)], [(Di00 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn20), (a b), nand2, (Q20)], [(y Q20), (a b), nand2, (Qn20)], [(x Qn20), (a b), nand2, (Q20)], [(y Q20), (a b), nand2, (Qn20)]"    
-    bit21 = "[(Res D1), (K L), reset, (Di21)], [(Di01 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn21), (a b), nand2, (Q21)], [(y Q21), (a b), nand2, (Qn21)], [(x Qn21), (a b), nand2, (Q21)], [(y Q21), (a b), nand2, (Qn21)]"      
-    bit22 = "[(Res D2), (K L), reset, (Di22)], [(Di02 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn22), (a b), nand2, (Q22)], [(y Q22), (a b), nand2, (Qn22)], [(x Qn22), (a b), nand2, (Q22)], [(y Q22), (a b), nand2, (Qn22)]"       
-    bit23 = "[(Res D3), (K L), reset, (Di23)], [(Di03 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn23), (a b), nand2, (Q23)], [(y Q23), (a b), nand2, (Qn23)], [(x Qn23), (a b), nand2, (Q23)], [(y Q23), (a b), nand2, (Qn23)]"        
+    bit20 = "[(Res QR0), (K L), reset, (Di20)], [(Di00 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn20), (a b), nand2, (Q20)], [(y Q20), (a b), nand2, (Qn20)], [(x Qn20), (a b), nand2, (Q20)], [(y Q20), (a b), nand2, (Qn20)]"    
+    bit21 = "[(Res QR1), (K L), reset, (Di21)], [(Di01 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn21), (a b), nand2, (Q21)], [(y Q21), (a b), nand2, (Qn21)], [(x Qn21), (a b), nand2, (Q21)], [(y Q21), (a b), nand2, (Qn21)]"      
+    bit22 = "[(Res QR2), (K L), reset, (Di22)], [(Di02 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn22), (a b), nand2, (Q22)], [(y Q22), (a b), nand2, (Qn22)], [(x Qn22), (a b), nand2, (Q22)], [(y Q22), (a b), nand2, (Qn22)]"       
+    bit23 = "[(Res QR3), (K L), reset, (Di23)], [(Di03 E2), (a b), nand2, (x)], [(E2 x), (a b), nand2, (y)], [(x Qn23), (a b), nand2, (Q23)], [(y Q23), (a b), nand2, (Qn23)], [(x Qn23), (a b), nand2, (Q23)], [(y Q23), (a b), nand2, (Qn23)]"        
 
-    bit30 = "[(Res D0), (K L), reset, (Di30)], [(Di00 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn30), (a b), nand2, (Q30)], [(y Q30), (a b), nand2, (Qn30)], [(x Qn30), (a b), nand2, (Q30)], [(y Q30), (a b), nand2, (Qn30)]"    
-    bit31 = "[(Res D1), (K L), reset, (Di31)], [(Di01 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn31), (a b), nand2, (Q31)], [(y Q31), (a b), nand2, (Qn31)], [(x Qn31), (a b), nand2, (Q31)], [(y Q31), (a b), nand2, (Qn31)]"      
-    bit32 = "[(Res D2), (K L), reset, (Di32)], [(Di02 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn32), (a b), nand2, (Q32)], [(y Q32), (a b), nand2, (Qn32)], [(x Qn32), (a b), nand2, (Q32)], [(y Q32), (a b), nand2, (Qn32)]"       
-    bit33 = "[(Res D3), (K L), reset, (Di33)], [(Di03 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn33), (a b), nand2, (Q33)], [(y Q33), (a b), nand2, (Qn33)], [(x Qn33), (a b), nand2, (Q33)], [(y Q33), (a b), nand2, (Qn33)]"        
+    bit30 = "[(Res QR0), (K L), reset, (Di30)], [(Di00 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn30), (a b), nand2, (Q30)], [(y Q30), (a b), nand2, (Qn30)], [(x Qn30), (a b), nand2, (Q30)], [(y Q30), (a b), nand2, (Qn30)]"    
+    bit31 = "[(Res QR1), (K L), reset, (Di31)], [(Di01 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn31), (a b), nand2, (Q31)], [(y Q31), (a b), nand2, (Qn31)], [(x Qn31), (a b), nand2, (Q31)], [(y Q31), (a b), nand2, (Qn31)]"      
+    bit32 = "[(Res QR2), (K L), reset, (Di32)], [(Di02 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn32), (a b), nand2, (Q32)], [(y Q32), (a b), nand2, (Qn32)], [(x Qn32), (a b), nand2, (Q32)], [(y Q32), (a b), nand2, (Qn32)]"       
+    bit33 = "[(Res QR3), (K L), reset, (Di33)], [(Di03 E3), (a b), nand2, (x)], [(E3 x), (a b), nand2, (y)], [(x Qn33), (a b), nand2, (Q33)], [(y Q33), (a b), nand2, (Qn33)], [(x Qn33), (a b), nand2, (Q33)], [(y Q33), (a b), nand2, (Qn33)]"        
 
 
     machine.chip('bit00', bit00)
@@ -76,7 +76,7 @@ def load(machine):
 
 
     ## burn a chip and test it!!
-    burn  = "(D3 D2 D1 D0)(Qacn1 Qacn)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
+    burn  = "(QR3 QR2 QR1 QR0)(Qacn1 Qacn)(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
     machine.burn("MEM", burn)
 
     burn2  = "(E Res)(decoder bit00 bit01 bit02 bit03 bit10 bit11 bit12 bit13 bit20 bit21 bit22 bit23 bit30 bit31 bit32 bit33 plexer0 plexer1 plexer2 plexer3)(Q3 Q2 Q1 Q0)"
