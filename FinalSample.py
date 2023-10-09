@@ -17,25 +17,25 @@ RegisterR.load(machine)
 
 
 ## init memory, 
-print(machine.run("MEM", ("0011",'00','10')))
-print(machine.run("MEM", ("0001",'01','10')))
-print(machine.run("MEM", ("1111",'10','10')))
-print(machine.run("MEM", ("1111",'11','11')))
+(machine.run("MEM", ("0011",'00','10')))
+(machine.run("MEM", ("0101",'01','10')))
+(machine.run("MEM", ("1111",'10','10')))
+(machine.run("MEM", ("1111",'11','11')))
 
 ## set adres counter to first adres
-print(machine.run("adrescounter", ('1')))
+(machine.run("adrescounter", ('1')))
 ## read first adres
-print(machine.run("memory", ('00')))
+(machine.run("memory", ('00')))
 ## write to register A
-print(machine.run("regA", ('10')))
+(machine.run("regA", ('10')))
 
 ## write next memory adres in register B
-print(machine.run("adrescounter", ('1')))
-print(machine.run("memory", ('00')))
-print(machine.run("regB", ('10')))
+(machine.run("adrescounter", ('1')))
+(machine.run("memory", ('00')))
+(machine.run("regB", ('10')))
 
 ## perform alu operation
-print(machine.run("alu", ('1000')))
+(machine.run("alu", ('0100')))
 
     # Truth table
     # ---------------------
@@ -50,13 +50,13 @@ print(machine.run("alu", ('1000')))
     # ---------------------
 
 ## Write result to register R
-print(machine.run("regR", ('10')))
+(machine.run("regR", ('10')))
 ## set adrescounter to 3 adres
-print(machine.run("adrescounter", ('1')))
+(machine.run("adrescounter", ('1')))
 # Set Register R to Datalines memory
 machine.dip(machine.run("regR", ('00')), "(D3 D2 D1 D0)")
 # Write datalines to memory adres
-print(machine.run("memory", ('10')))
+(machine.run("memory", ('10')))
 
 
 ## Check result in memory
