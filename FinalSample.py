@@ -17,13 +17,14 @@ RegisterR.load(machine)
 
 
 ## init memory, 
-(machine.run("MEM", ("0011",'00','10')))
-(machine.run("MEM", ("0101",'01','10')))
-(machine.run("MEM", ("1111",'10','10')))
 (machine.run("MEM", ("1111",'11','11')))
+(machine.run("MEM", ("0000",'10','10')))
+(machine.run("MEM", ("0011",'01','10')))
+(machine.run("MEM", ("1111",'00','10')))
 
-## set adres counter to first adres
-(machine.run("adrescounter", ('1')))
+
+## set adrescounter to adres line
+print(machine.run("adrescounter", ('0')))
 ## read first adres
 (machine.run("memory", ('00')))
 ## write to register A
@@ -35,7 +36,7 @@ RegisterR.load(machine)
 (machine.run("regB", ('10')))
 
 ## perform alu operation
-(machine.run("alu", ('1000')))
+print(machine.run("alu", ('0101')))
 
     # Truth table
     # ---------------------
@@ -54,7 +55,7 @@ RegisterR.load(machine)
 ## set adrescounter to 3 adres
 (machine.run("adrescounter", ('1')))
 # Set Register R to Datalines memory
-(machine.run("regR", ('00')))
+#(machine.run("regR", ('00')))
 # Write datalines to memory adres
 (machine.run("memory", ('10')))
 
